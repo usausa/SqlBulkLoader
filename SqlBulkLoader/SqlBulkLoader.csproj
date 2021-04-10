@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\SqlBulkLoader.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>SqlBulkLoader</PackageId>
+    <Title>SqlBulkLoader</Title>
+    <Description>SqlBulkCopy helper</Description>
+    <Summary>SqlBulkCopy helper</Summary>
+    <PackageTags>sqlclient bulkcopy</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.2" />
+    <PackageReference Include="Usa.Smart.Core" Version="1.8.8" />
+  </ItemGroup>
+
+</Project>
