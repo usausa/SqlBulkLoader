@@ -7,12 +7,12 @@ namespace SqlBulkLoader
     using System.Threading.Tasks;
 
     using Microsoft.Data.SqlClient;
-
+    using Smart.Linq;
     using Smart.Reflection;
 
     public sealed class SqlBulkLoader : IBulkLoader
     {
-        private readonly ConcurrentDictionary<Type, Func<object, object>[]> accessorCache = new();
+        private readonly ConcurrentDictionary<Type, Func<object?, object?>[]> accessorCache = new();
 
         private readonly SqlBulkLoaderConfig config;
 
@@ -35,9 +35,12 @@ namespace SqlBulkLoader
             await loader.WriteToServerAsync(reader).ConfigureAwait(false);
         }
 
-        private Func<object, object>[] CreateAccessors(Type type)
+        private Func<object?, object?>[] CreateAccessors(Type type)
         {
-            return config.PropertySelector(type).Select(x => DelegateFactory.Default.CreateGetter(x)).ToArray();
+            return config.PropertySelector(type)
+                .Select(x => DelegateFactory.Default.CreateGetter(x))
+                .ExcludeNull()
+                .ToArray();
         }
     }
 }

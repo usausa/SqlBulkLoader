@@ -8,7 +8,7 @@ namespace SqlBulkLoader
     {
         private readonly IEnumerator<T> source;
 
-        private readonly Func<object, object>[] accessors;
+        private readonly Func<object?, object?>[] accessors;
 
         public int FieldCount => accessors.Length;
 
@@ -22,7 +22,7 @@ namespace SqlBulkLoader
 
         public object this[string name] => throw new NotSupportedException();
 
-        public BulkDataReader(IEnumerable<T> source, Func<object, object>[] accessors)
+        public BulkDataReader(IEnumerable<T> source, Func<object?, object?>[] accessors)
         {
             this.source = source.GetEnumerator();
             this.accessors = accessors;
@@ -43,7 +43,7 @@ namespace SqlBulkLoader
 
         public bool IsDBNull(int i) => throw new NotSupportedException();
 
-        public object GetValue(int i) => accessors[i](source.Current!);
+        public object GetValue(int i) => accessors[i](source.Current!)!;
 
         public int GetValues(object[] values) => throw new NotSupportedException();
 
