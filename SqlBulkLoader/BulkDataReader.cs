@@ -63,11 +63,11 @@ namespace SqlBulkLoader
 
         public byte GetByte(int i) => throw new NotSupportedException();
 
-        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferOffset, int length) => throw new NotSupportedException();
+        public long GetBytes(int i, long fieldOffset, byte[]? buffer, int bufferOffset, int length) => throw new NotSupportedException();
 
         public char GetChar(int i) => throw new NotSupportedException();
 
-        public long GetChars(int i, long fieldOffset, char[] buffer, int bufferOffset, int length) => throw new NotSupportedException();
+        public long GetChars(int i, long fieldOffset, char[]? buffer, int bufferOffset, int length) => throw new NotSupportedException();
 
         public DateTime GetDateTime(int i) => throw new NotSupportedException();
 
