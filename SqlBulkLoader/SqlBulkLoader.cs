@@ -25,7 +25,9 @@ namespace SqlBulkLoader
         {
             var accessors = accessorCache.GetOrAdd(typeof(T), CreateAccessors);
             using var reader = new BulkDataReader<T>(source, accessors);
+#pragma warning disable CA2007
             await using var con = new SqlConnection(config.ConnectionString);
+#pragma warning restore CA2007
             await con.OpenAsync().ConfigureAwait(false);
 
             using var loader = new SqlBulkCopy(con)
