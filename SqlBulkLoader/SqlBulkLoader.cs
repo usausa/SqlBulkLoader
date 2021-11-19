@@ -1,48 +1,47 @@
-namespace SqlBulkLoader
+namespace SqlBulkLoader;
+
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Microsoft.Data.SqlClient;
+using Smart.Linq;
+using Smart.Reflection;
+
+public sealed class SqlBulkLoader : IBulkLoader
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    private readonly ConcurrentDictionary<Type, Func<object?, object?>[]> accessorCache = new();
 
-    using Microsoft.Data.SqlClient;
-    using Smart.Linq;
-    using Smart.Reflection;
+    private readonly SqlBulkLoaderConfig config;
 
-    public sealed class SqlBulkLoader : IBulkLoader
+    public SqlBulkLoader(SqlBulkLoaderConfig config)
     {
-        private readonly ConcurrentDictionary<Type, Func<object?, object?>[]> accessorCache = new();
+        this.config = config;
+    }
 
-        private readonly SqlBulkLoaderConfig config;
-
-        public SqlBulkLoader(SqlBulkLoaderConfig config)
-        {
-            this.config = config;
-        }
-
-        public async ValueTask LoadAsync<T>(string table, IEnumerable<T> source)
-        {
-            var accessors = accessorCache.GetOrAdd(typeof(T), CreateAccessors);
-            using var reader = new BulkDataReader<T>(source, accessors);
+    public async ValueTask LoadAsync<T>(string table, IEnumerable<T> source)
+    {
+        var accessors = accessorCache.GetOrAdd(typeof(T), CreateAccessors);
+        using var reader = new BulkDataReader<T>(source, accessors);
 #pragma warning disable CA2007
-            await using var con = new SqlConnection(config.ConnectionString);
+        await using var con = new SqlConnection(config.ConnectionString);
 #pragma warning restore CA2007
-            await con.OpenAsync().ConfigureAwait(false);
+        await con.OpenAsync().ConfigureAwait(false);
 
-            using var loader = new SqlBulkCopy(con)
-            {
-                DestinationTableName = table
-            };
-            await loader.WriteToServerAsync(reader).ConfigureAwait(false);
-        }
-
-        private Func<object?, object?>[] CreateAccessors(Type type)
+        using var loader = new SqlBulkCopy(con)
         {
-            return config.PropertySelector(type)
-                .Select(x => DelegateFactory.Default.CreateGetter(x))
-                .ExcludeNull()
-                .ToArray();
-        }
+            DestinationTableName = table
+        };
+        await loader.WriteToServerAsync(reader).ConfigureAwait(false);
+    }
+
+    private Func<object?, object?>[] CreateAccessors(Type type)
+    {
+        return config.PropertySelector(type)
+            .Select(x => DelegateFactory.Default.CreateGetter(x))
+            .ExcludeNull()
+            .ToArray();
     }
 }
