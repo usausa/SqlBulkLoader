@@ -2,15 +2,15 @@
 <RuleSet Name="SqlBulkLoader Rules" Description="SqlBulkLoader Rules" ToolsVersion="16.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-    <Rule Id="SA1101" Action="None" />
-    <Rule Id="SA1201" Action="None" />
-    <Rule Id="SA1413" Action="None" />
-    <Rule Id="SA1600" Action="None" />
-    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1101" Action="Hidden" />
+    <Rule Id="SA1201" Action="Hidden" />
+    <Rule Id="SA1413" Action="Hidden" />
+    <Rule Id="SA1600" Action="Hidden" />
+    <Rule Id="SA1633" Action="Hidden" />
   </Rules>
   <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
-    <Rule Id="CA1062" Action="None" />
-    <Rule Id="CA1724" Action="None" />
-    <Rule Id="CA1725" Action="None" />
+    <Rule Id="CA1062" Action="Hidden" />
+    <Rule Id="CA1724" Action="Hidden" />
+    <Rule Id="CA1725" Action="Hidden" />
   </Rules>
 </RuleSet>
