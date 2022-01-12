@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
