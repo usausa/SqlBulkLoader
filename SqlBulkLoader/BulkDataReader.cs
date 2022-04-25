@@ -1,7 +1,5 @@
 namespace SqlBulkLoader;
 
-using System;
-using System.Collections.Generic;
 using System.Data;
 
 public sealed class BulkDataReader<T> : IDataReader
