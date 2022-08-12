@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 using Smart.Linq;
 using Smart.Reflection;
 
-public sealed class SqlBulkLoader : IBulkLoader
+public sealed class SqlBulkLoader
 {
     private readonly ConcurrentDictionary<Type, Func<object?, object?>[]> accessorCache = new();
 

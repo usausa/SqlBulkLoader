@@ -2,7 +2,7 @@ namespace SqlBulkLoader;
 
 using System.Data;
 
-public sealed class BulkDataReader<T> : IDataReader
+internal sealed class BulkDataReader<T> : IDataReader
 {
     private readonly IEnumerator<T> source;
 
