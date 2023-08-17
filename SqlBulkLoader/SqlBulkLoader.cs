@@ -27,17 +27,15 @@ public sealed class SqlBulkLoader
 #pragma warning restore CA2007
         await con.OpenAsync().ConfigureAwait(false);
 
-        using var loader = new SqlBulkCopy(con)
-        {
-            DestinationTableName = table
-        };
+        using var loader = new SqlBulkCopy(con);
+        loader.DestinationTableName = table;
         await loader.WriteToServerAsync(reader).ConfigureAwait(false);
     }
 
     private Func<object?, object?>[] CreateAccessors(Type type)
     {
         return config.PropertySelector(type)
-            .Select(x => DelegateFactory.Default.CreateGetter(x))
+            .Select(DelegateFactory.Default.CreateGetter)
             .ExcludeNull()
             .ToArray();
     }
