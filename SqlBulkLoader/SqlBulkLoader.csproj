@@ -9,7 +9,6 @@
     <PackageId>SqlBulkLoader</PackageId>
     <Title>SqlBulkLoader</Title>
     <Description>SqlBulkCopy helper</Description>
-    <Summary>SqlBulkCopy helper</Summary>
     <PackageTags>sqlclient bulkcopy</PackageTags>
   </PropertyGroup>
 
