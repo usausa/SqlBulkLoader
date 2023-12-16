@@ -2,7 +2,7 @@ namespace SqlBulkLoader;
 
 using System.Reflection;
 
-public class SqlBulkLoaderConfig
+public sealed class SqlBulkLoaderConfig
 {
     public string ConnectionString { get; set; } = default!;
 
