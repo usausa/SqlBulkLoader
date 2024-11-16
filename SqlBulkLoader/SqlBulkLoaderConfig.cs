@@ -6,5 +6,5 @@ public sealed class SqlBulkLoaderConfig
 {
     public string ConnectionString { get; set; } = default!;
 
-    public Func<Type, IEnumerable<PropertyInfo>> PropertySelector { get; set; } = t => t.GetProperties();
+    public Func<Type, IEnumerable<PropertyInfo>> PropertySelector { get; set; } = static t => t.GetProperties();
 }
