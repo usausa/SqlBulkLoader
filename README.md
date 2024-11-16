@@ -1,6 +1,8 @@
 # SqlBulkLoader - SqlBulkCopy helper
 
-## Usage example
+[![NuGet](https://img.shields.io/nuget/v/SqlBulkLoader.svg)](https://www.nuget.org/packages/SqlBulkLoader)
+
+# Usage
 
 ```csharp
 using System;
