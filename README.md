@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/v/SqlBulkLoader.svg)](https://www.nuget.org/packages/SqlBulkLoader)
 
 **The following libraries are recommended over this one:**
-- [DataReaderAdapter](https://github.com/usausa/string-convert-helper.git)
+- [DataReaderAdapter](https://github.com/usausa/data-reader-adapter.git)
 
 # Usage
 
